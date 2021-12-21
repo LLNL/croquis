@@ -44,14 +44,6 @@ if (EXISTS "${LOC_PATH}")
     )
 endif ()
 
-add_library(croquis INTERFACE)
-add_library(croquis::croquis ALIAS croquis)
-target_include_directories(
-    croquis INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                      $<INSTALL_INTERFACE:include>
-)
-target_compile_features(croquis INTERFACE cxx_std_17)
-
 # Prepare to invoke FetchContent
 include(FetchContent)
 
@@ -64,7 +56,6 @@ if (CROQUIS_USE_BOOST)
         message(STATUS "croquis found boost include dirs: "
                        ${Boost_INCLUDE_DIRS}
         )
-        target_include_directories(croquis INTERFACE ${Boost_INCLUDE_DIRS})
     else ()
         message(STATUS "croquis could not find boost. skipping...")
     endif ()
@@ -78,6 +69,7 @@ if (CROQUIS_USE_YGM)
     set(CROQUIS_CEREAL_VERSION 1.3.0)
     # Will do something like this upon new release and fix to spack
     # distribution. find_package(cereal ${CROQUIS_CEREAL_VERSION} CONFIG QUIET)
+    set(CROQUIS_CEREAL_TARGET "cereal::cereal")
     find_package(cereal CONFIG QUIET)
     if (NOT cereal_FOUND)
         # Currently cereal version 1.3.0 has an outdated CMakeLists.txt, so we
@@ -105,7 +97,6 @@ if (CROQUIS_USE_YGM)
                            ${cereal_SOURCE_DIR}
             )
         endif ()
-        target_link_libraries(croquis INTERFACE cereal::cereal)
     else ()
         # cereal installed with spack creates library target "cereal", whereas
         # installing from source creates target "cereal::cereal". This is the
@@ -116,9 +107,9 @@ if (CROQUIS_USE_YGM)
                        ${cereal_DIR}
         )
         if (${cereal_DIR} MATCHES ".*spack.*")
-            target_link_libraries(croquis INTERFACE cereal)
+            set(CROQUIS_CEREAL_TARGET "cereal")
         else ()
-            target_link_libraries(croquis INTERFACE cereal::cereal)
+            # target should still be cereal::cereal
         endif ()
     endif ()
 
@@ -150,9 +141,20 @@ if (CROQUIS_USE_YGM)
     else ()
         message(STATUS "croquis found ygm dependency " ${ygm_DIR})
     endif ()
-    target_link_libraries(croquis INTERFACE ygm::ygm)
 else ()
     message(STATUS "croquis building without ygm")
+endif ()
+
+add_library(croquis INTERFACE)
+add_library(croquis::croquis ALIAS croquis)
+target_include_directories(
+    croquis INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                      $<INSTALL_INTERFACE:include>
+)
+target_compile_features(croquis INTERFACE cxx_std_17)
+target_link_libraries(croquis INTERFACE ${CROQUIS_CEREAL_TARGET} ygm::ygm)
+if (Boost_FOUND)
+    target_include_directories(croquis INTERFACE ${Boost_INCLUDE_DIRS})
 endif ()
 
 option(TEST_WITH_SLURM "Run tests with Slurm" OFF)
