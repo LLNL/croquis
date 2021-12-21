@@ -53,14 +53,14 @@ if (CROQUIS_USE_BOOST)
     # find_package(Boost 1.75 COMPONENTS container)
     find_package(Boost ${croquis_boost_VERSION} QUIET)
     if (Boost_FOUND)
-        message(STATUS "croquis found boost include dirs: "
+        message(STATUS ${PROJECT_NAME} " found boost include dirs: "
                        ${Boost_INCLUDE_DIRS}
         )
     else ()
-        message(STATUS "croquis could not find boost. skipping...")
+        message(STATUS ${PROJECT_NAME} " could not find boost. skipping...")
     endif ()
 else ()
-    message(STATUS "croquis building without boost")
+    message(STATUS ${PROJECT_NAME} " building without boost")
 endif ()
 
 option(CROQUIS_USE_YGM "Compile using YGM distributed memory features" ON)
@@ -81,7 +81,8 @@ if (CROQUIS_USE_YGM)
         )
         FetchContent_GetProperties(cereal)
         if (cereal_POPULATED)
-            message(STATUS "croquis found already populated cereal dependency: "
+            message(STATUS ${PROJECT_NAME}
+                           " found already populated cereal dependency: "
                            ${cereal_SOURCE_DIR}
             )
         else ()
@@ -93,7 +94,7 @@ if (CROQUIS_USE_YGM)
             FetchContent_Populate(cereal)
             # Include cereal root cmake boilerplate
             add_subdirectory(${cereal_SOURCE_DIR})
-            message(STATUS "croquis cloned cereal dependency: "
+            message(STATUS ${PROJECT_NAME} " cloned cereal dependency: "
                            ${cereal_SOURCE_DIR}
             )
         endif ()
@@ -103,7 +104,7 @@ if (CROQUIS_USE_YGM)
         # only simple way I could figure out how to differentiate the two, but
         # this will cause problems if a spack instance installs headers to a
         # path that does not include the substring "spack".
-        message(STATUS "croquis found installed cereal dependency: "
+        message(STATUS ${PROJECT_NAME} " found installed cereal dependency: "
                        ${cereal_DIR}
         )
         if (${cereal_DIR} MATCHES ".*spack.*")
@@ -124,7 +125,8 @@ if (CROQUIS_USE_YGM)
         )
         FetchContent_GetProperties(ygm)
         if (ygm_POPULATED)
-            message(STATUS "croquis found already populated ygm dependency: "
+            message(STATUS ${PROJECT_NAME}
+                           " found already populated ygm dependency: "
                            ${ygm_SOURCE_DIR}
             )
         else ()
@@ -136,13 +138,15 @@ if (CROQUIS_USE_YGM)
             FetchContent_Populate(ygm)
             # Include ygm cmake boilerplate
             add_subdirectory(${ygm_SOURCE_DIR})
-            message(STATUS "croquis cloned ygm dependency " ${ygm_SOURCE_DIR})
+            message(STATUS ${PROJECT_NAME} " cloned ygm dependency "
+                           ${ygm_SOURCE_DIR}
+            )
         endif ()
     else ()
-        message(STATUS "croquis found ygm dependency " ${ygm_DIR})
+        message(STATUS ${PROJECT_NAME} " found ygm dependency " ${ygm_DIR})
     endif ()
 else ()
-    message(STATUS "croquis building without ygm")
+    message(STATUS ${PROJECT_NAME} " building without ygm")
 endif ()
 
 add_library(croquis INTERFACE)
