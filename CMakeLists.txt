@@ -114,7 +114,7 @@ if (CROQUIS_USE_YGM)
     endif ()
 
     # Load YGM
-    set(CROQUIS_YGM_VERSION 0.3)
+    set(CROQUIS_YGM_VERSION 0.4)
     find_package(ygm ${CROQUIS_YGM_VERSION} CONFIG QUIET)
     if (NOT ygm_FOUND)
         FetchContent_Declare(
