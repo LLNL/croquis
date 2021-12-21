@@ -44,14 +44,6 @@ if (EXISTS "${LOC_PATH}")
     )
 endif ()
 
-add_library(croquis INTERFACE)
-add_library(croquis::croquis ALIAS croquis)
-target_include_directories(
-    croquis INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                      $<INSTALL_INTERFACE:include>
-)
-target_compile_features(croquis INTERFACE cxx_std_17)
-
 # Prepare to invoke FetchContent
 include(FetchContent)
 
@@ -61,15 +53,14 @@ if (CROQUIS_USE_BOOST)
     # find_package(Boost 1.75 COMPONENTS container)
     find_package(Boost ${croquis_boost_VERSION} QUIET)
     if (Boost_FOUND)
-        message(STATUS "croquis found boost include dirs: "
+        message(STATUS ${PROJECT_NAME} " found boost include dirs: "
                        ${Boost_INCLUDE_DIRS}
         )
-        target_include_directories(croquis INTERFACE ${Boost_INCLUDE_DIRS})
     else ()
-        message(STATUS "croquis could not find boost. skipping...")
+        message(STATUS ${PROJECT_NAME} " could not find boost. skipping...")
     endif ()
 else ()
-    message(STATUS "croquis building without boost")
+    message(STATUS ${PROJECT_NAME} " building without boost")
 endif ()
 
 option(CROQUIS_USE_YGM "Compile using YGM distributed memory features" ON)
@@ -78,6 +69,7 @@ if (CROQUIS_USE_YGM)
     set(CROQUIS_CEREAL_VERSION 1.3.0)
     # Will do something like this upon new release and fix to spack
     # distribution. find_package(cereal ${CROQUIS_CEREAL_VERSION} CONFIG QUIET)
+    set(CROQUIS_CEREAL_TARGET "cereal::cereal")
     find_package(cereal CONFIG QUIET)
     if (NOT cereal_FOUND)
         # Currently cereal version 1.3.0 has an outdated CMakeLists.txt, so we
@@ -89,7 +81,8 @@ if (CROQUIS_USE_YGM)
         )
         FetchContent_GetProperties(cereal)
         if (cereal_POPULATED)
-            message(STATUS "croquis found already populated cereal dependency: "
+            message(STATUS ${PROJECT_NAME}
+                           " found already populated cereal dependency: "
                            ${cereal_SOURCE_DIR}
             )
         else ()
@@ -101,29 +94,28 @@ if (CROQUIS_USE_YGM)
             FetchContent_Populate(cereal)
             # Include cereal root cmake boilerplate
             add_subdirectory(${cereal_SOURCE_DIR})
-            message(STATUS "croquis cloned cereal dependency: "
+            message(STATUS ${PROJECT_NAME} " cloned cereal dependency: "
                            ${cereal_SOURCE_DIR}
             )
         endif ()
-        target_link_libraries(croquis INTERFACE cereal::cereal)
     else ()
         # cereal installed with spack creates library target "cereal", whereas
         # installing from source creates target "cereal::cereal". This is the
         # only simple way I could figure out how to differentiate the two, but
         # this will cause problems if a spack instance installs headers to a
         # path that does not include the substring "spack".
-        message(STATUS "croquis found installed cereal dependency: "
+        message(STATUS ${PROJECT_NAME} " found installed cereal dependency: "
                        ${cereal_DIR}
         )
         if (${cereal_DIR} MATCHES ".*spack.*")
-            target_link_libraries(croquis INTERFACE cereal)
+            set(CROQUIS_CEREAL_TARGET "cereal")
         else ()
-            target_link_libraries(croquis INTERFACE cereal::cereal)
+            # target should still be cereal::cereal
         endif ()
     endif ()
 
     # Load YGM
-    set(CROQUIS_YGM_VERSION 0.3)
+    set(CROQUIS_YGM_VERSION 0.4)
     find_package(ygm ${CROQUIS_YGM_VERSION} CONFIG QUIET)
     if (NOT ygm_FOUND)
         FetchContent_Declare(
@@ -133,7 +125,8 @@ if (CROQUIS_USE_YGM)
         )
         FetchContent_GetProperties(ygm)
         if (ygm_POPULATED)
-            message(STATUS "croquis found already populated ygm dependency: "
+            message(STATUS ${PROJECT_NAME}
+                           " found already populated ygm dependency: "
                            ${ygm_SOURCE_DIR}
             )
         else ()
@@ -145,14 +138,27 @@ if (CROQUIS_USE_YGM)
             FetchContent_Populate(ygm)
             # Include ygm cmake boilerplate
             add_subdirectory(${ygm_SOURCE_DIR})
-            message(STATUS "croquis cloned ygm dependency " ${ygm_SOURCE_DIR})
+            message(STATUS ${PROJECT_NAME} " cloned ygm dependency "
+                           ${ygm_SOURCE_DIR}
+            )
         endif ()
     else ()
-        message(STATUS "croquis found ygm dependency " ${ygm_DIR})
+        message(STATUS ${PROJECT_NAME} " found ygm dependency " ${ygm_DIR})
     endif ()
-    target_link_libraries(croquis INTERFACE ygm::ygm)
 else ()
-    message(STATUS "croquis building without ygm")
+    message(STATUS ${PROJECT_NAME} " building without ygm")
+endif ()
+
+add_library(croquis INTERFACE)
+add_library(croquis::croquis ALIAS croquis)
+target_include_directories(
+    croquis INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+                      $<INSTALL_INTERFACE:include>
+)
+target_compile_features(croquis INTERFACE cxx_std_17)
+target_link_libraries(croquis INTERFACE ${CROQUIS_CEREAL_TARGET} ygm::ygm)
+if (Boost_FOUND)
+    target_include_directories(croquis INTERFACE ${Boost_INCLUDE_DIRS})
 endif ()
 
 option(TEST_WITH_SLURM "Run tests with Slurm" OFF)
