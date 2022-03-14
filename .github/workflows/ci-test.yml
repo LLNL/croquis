@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install boost
         run: |
-	  cd ..
+          cd ..
           wget --no-verbose https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
           tar -xjf boost_1_77_0.tar.bz2
       - name: Install MPI
@@ -44,8 +44,8 @@ jobs:
           ctest -VV -C ${{env.BUILD_TYPE}}
       - name : Make test (OpenMPI)
         if: ${{ matrix.mpi-type == "openmpi-bin libopenmpi-dev" }}
-	run: |
-	  echo Run 'make test' with OpenMPI, gcc-${{ matrix.gcc-version }}
-	  cd build
-	  export OMPI_MCA_rmaps_base_oversubscribe=1
+        run: |
+          echo Run 'make test' with OpenMPI, gcc-${{ matrix.gcc-version }}
+          cd build
+          export OMPI_MCA_rmaps_base_oversubscribe=1
           ctest -VV -C ${{env.BUILD_TYPE}}
