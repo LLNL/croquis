@@ -19,8 +19,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Dependencies (GCC version ${{ matrix.gcc-version }})
         run: |
-          mkdir build
-          cd build
           wget --no-verbose https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
           tar -xjf boost_1_77_0.tar.bz2
           sudo apt-get install ${{ matrix.mpi-version }}
@@ -29,6 +27,7 @@ jobs:
           echo Run 'make'
           mpicc -show
           g++-${{ matrix.gcc-version }} --version
+	  mkdir build
           cd build
           cmake ../ -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE-CXX_COMPILER=g++-${{matrix.gcc-version}} -DBOOST_ROOT=$PWD/boost_1_77_0
           make
