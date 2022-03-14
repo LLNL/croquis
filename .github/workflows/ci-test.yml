@@ -26,7 +26,7 @@ jobs:
         run: sudo apt-get install ${{ matrix.mpi-type }}
       - name: Install GCC-${{ matrix.gcc-version }}
         if: ${{ matrix.gcc-version == "8" || matrix.gcc-version == "11" }}
-	run: sudo apt-get install gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
+        run: sudo apt-get install gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
       - name: Make
         run: |
           echo Run 'make'
