@@ -12,17 +12,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        gcc-version: ["9", "10", "11"]
-        mpi-version: ["openmpi-bin libopenmpi-dev", "mpich"]
+        gcc-version: ["8", "9", "10", "11"]
+        mpi-type: ["openmpi-bin libopenmpi-dev", "mpich"]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Install Dependencies (GCC version ${{ matrix.gcc-version }})
+      - name: Install boost
         run: |
-          cd ..
+	  cd ..
           wget --no-verbose https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
           tar -xjf boost_1_77_0.tar.bz2
-          sudo apt-get install ${{ matrix.mpi-version }}
+      - name: Install MPI
+        run: sudo apt-get install ${{ matrix.mpi-type }}
+      - name: Install GCC-${{ matrix.gcc-version }}
+        if: ${{ matrix.gcc-version == "8" || matrix.gcc-version == "11" }}
+	run: sudo apt-get install gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
       - name: Make
         run: |
           echo Run 'make'
@@ -30,10 +34,18 @@ jobs:
           g++-${{ matrix.gcc-version }} --version
           mkdir build
           cd build
-          cmake ../ -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE-CXX_COMPILER=g++-${{matrix.gcc-version}} -DBOOST_ROOT=$PWD/../../boost_1_77_0
+          cmake ../ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE-CXX_COMPILER=g++-${{ matrix.gcc-version }} -DBOOST_ROOT=$PWD/../../boost_1_77_0
           make
-      - name: Make test
+      - name: Make test (mpich)
+        if: ${{ matrix.mpi-version == "mpich"}}
         run: |
-          echo Run 'make test'
+          echo Run 'make test' with mpich, gcc-${{ matrix.gcc-version }}
           cd build
+          ctest -VV -C ${{env.BUILD_TYPE}}
+      - name : Make test (OpenMPI)
+        if: ${{ matrix.mpi-type == "openmpi-bin libopenmpi-dev" }}
+	run: |
+	  echo Run 'make test' with OpenMPI, gcc-${{ matrix.gcc-version }}
+	  cd build
+	  export OMPI_MCA_rmaps_base_oversubscribe=1
           ctest -VV -C ${{env.BUILD_TYPE}}
