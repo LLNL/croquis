@@ -1,0 +1,38 @@
+name: CI Test
+
+on: [push, pull_request]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        gcc-version: ["9", "10", "11"]
+        mpi-version: ["openmpi-bin libopenmpi-dev", "mpich"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies (GCC version ${{ matrix.gcc-version }})
+        run: |
+          wget --no-verbose https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
+          tar -xjf boost_1_77_0.tar.bz2
+          sudo apt-get install ${{ matrix.mpi-version }}
+      - name: Make
+        run: |
+          echo Run 'make'
+          mpicc -show
+          g++-${{ matrix.gcc-version }} --version
+          mkdir build
+          cd build
+          cmake ../ -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE-CXX_COMPILER=g++-${{matrix.gcc-version}} -DBOOST_ROOT=$PWD/../boost_1_77_0
+          make
+      - name: Make test
+        run: |
+          echo Run 'make test'
+          cd build
+          ctest -VV -C ${{env.BUILD_TYPE}}
