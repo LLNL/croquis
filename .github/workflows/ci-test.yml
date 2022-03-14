@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        gcc-version: ["8", "9", "10", "11"]
-        mpi-type: ["openmpi-bin libopenmpi-dev", "mpich"]
+        gcc-version: [8, 9, 10, 11]
+        mpi-type: [openmpi, mpich]
 
     steps:
       - uses: actions/checkout@v2
@@ -22,10 +22,14 @@ jobs:
           cd ..
           wget --no-verbose https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
           tar -xjf boost_1_77_0.tar.bz2
-      - name: Install MPI
-        run: sudo apt-get install ${{ matrix.mpi-type }}
+      - name: Install OpenMPI
+        if: ${{ matrix.mpi-type == 'openmpi' }}
+        run: sudo apt-get install openmpi-bin libopenmpi-dev
+      - name: Install mpich
+        if: ${{ matrix.mpi-type == 'mpich' }}
+        run: sudo apt-get install mpich
       - name: Install GCC-${{ matrix.gcc-version }}
-        if: ${{ matrix.gcc-version == "8" || matrix.gcc-version == "11" }}
+        if: ${{ matrix.gcc-version == '8' || matrix.gcc-version == '11' }}
         run: sudo apt-get install gcc-${{ matrix.gcc-version }} g++-${{ matrix.gcc-version }}
       - name: Make
         run: |
@@ -37,13 +41,13 @@ jobs:
           cmake ../ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE-CXX_COMPILER=g++-${{ matrix.gcc-version }} -DBOOST_ROOT=$PWD/../../boost_1_77_0
           make
       - name: Make test (mpich)
-        if: ${{ matrix.mpi-version == "mpich"}}
+        if: ${{ matrix.mpi-version == 'mpich'}}
         run: |
           echo Run 'make test' with mpich, gcc-${{ matrix.gcc-version }}
           cd build
           ctest -VV -C ${{env.BUILD_TYPE}}
       - name : Make test (OpenMPI)
-        if: ${{ matrix.mpi-type == "openmpi-bin libopenmpi-dev" }}
+        if: ${{ matrix.mpi-type == 'openmpi' }}
         run: |
           echo Run 'make test' with OpenMPI, gcc-${{ matrix.gcc-version }}
           cd build
