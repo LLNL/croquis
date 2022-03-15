@@ -1,23 +1,23 @@
-# CROQUIS: A Distributed Multi-Stream Data Sketching Toolkit.
+# KROWKEE: A Distributed Multi-Stream Data Sketching Toolkit.
 
-This repository implements `croquis`, a toolkit for scalably and efficiently 
+This repository implements `krowkee`, a toolkit for scalably and efficiently 
 summarizing many data streams in distributed memory.
-`croquis` is intended for applications involving where one needs to summarize 
+`krowkee` is intended for applications involving where one needs to summarize 
 huge loosely structured data, such as matrices or graphs, where individual 
 components such as rows/columns or vertex adjacency information are impractical 
 to store and directly inspect.
-`croquis` ingests these objects as data streams - unstructured, arbitrarily 
+`krowkee` ingests these objects as data streams - unstructured, arbitrarily 
 ordered lists of updates - and accumulates summaries thereof in the form of data 
 sketches.
 
 Although there are many types of data sketches, the practical varieties encompassed by
-croquis have many advantages compared to directly observing data:
+krowkee have many advantages compared to directly observing data:
 * approximation guarantees on some stream statistic
 * merge operator
 * worst-case logarithmic memory usage
 * ... and many even support sparse storage
 
-`croquis` currently supports only 
+`krowkee` currently supports only 
 [sparse subspace embeddings](https://arxiv.org/abs/1207.6365)
 to perform randomized and fast dimensionality reduction. 
 Future sketch support is planned, principally including cardinality sketches 
@@ -32,52 +32,52 @@ Your mileage may vary with other compilers.
 * Optional dependencies:
     - [YGM](https://github.com/LLNL/ygm) 0.3 or greater for distributed memory
       communication. 
-      Toggle with CMake option `CROQUIS_USE_YGM`. 
+      Toggle with CMake option `KROWKEE_USE_YGM`. 
       Default `ON`.
-      If package `ygm` is not installed, `croquis` will attempt to clone and
+      If package `ygm` is not installed, `krowkee` will attempt to clone and
       install via 
       [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html). Includes additional dependencies:
         * [Cereal](https://github.com/USCiLab/cereal) - C++ serialization 
           library. 
-          If package `cereal` is not installed, `croquis` will attempt
+          If package `cereal` is not installed, `krowkee` will attempt
           [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html).
         * MPI         
     - [Boost](https://www.boost.org/) 1.48 or greater for 
       `boost::container::flatmap`. 
-      Toggle with CMake option `CROQUIS_USE_BOOST`.
+      Toggle with CMake option `KROWKEE_USE_BOOST`.
       Default `ON`.
 
-## Using `croquis` with CMake
+## Using `krowkee` with CMake
 
-`croquis` is a header-only library that is simple to incorporate into dependent
+`krowkee` is a header-only library that is simple to incorporate into dependent
 projects using CMake.
-Add the following to your `CMakeLists.txt` to "find-else-fetch" `croquis`, 
+Add the following to your `CMakeLists.txt` to "find-else-fetch" `krowkee`, 
 cloning it and its dependencies and preparing their headers for installation as
 a part of your project.
 ```
-set(DESIRED_CROQUIS_VERSION 0.1)
-find_package(croquis ${DESIRED_CROQUIS_VERSION} CONFIG)
-if (NOT croquis_FOUND)
+set(DESIRED_KROWKEE_VERSION 0.1)
+find_package(krowkee ${DESIRED_KROWKEE_VERSION} CONFIG)
+if (NOT krowkee_FOUND)
     FetchContent_Declare(
-        croquis
-        GIT_REPOSITORY https://github.com/LLNL/croquis
-        GIT_TAG v${DESIRED_CROQUIS_VERSION}
+        krowkee
+        GIT_REPOSITORY https://github.com/LLNL/krowkee
+        GIT_TAG v${DESIRED_KROWKEE_VERSION}
     )
-    FetchContent_GetProperties(croquis)
-    if (croquis_POPULATED)
-        message(STATUS "Found already populated croquis dependency: "
-                       ${croquis_SOURCE_DIR}
+    FetchContent_GetProperties(krowkee)
+    if (krowkee_POPULATED)
+        message(STATUS "Found already populated krowkee dependency: "
+                       ${krowkee_SOURCE_DIR}
         )
     else ()
-        set(JUST_INSTALL_CROQUIS ON)
-        set(CROQUIS_INSTALL ON)
-        set(CROQUIS_USE_YGM ON)  # or OFF if local-only
-        FetchContent_Populate(croquis)
-        add_subdirectory(${croquis_SOURCE_DIR} ${croquis_BINARY_DIR})
-        message(STATUS "Cloned croquis dependency " ${croquis_SOURCE_DIR})
+        set(JUST_INSTALL_KROWKEE ON)
+        set(KROWKEE_INSTALL ON)
+        set(KROWKEE_USE_YGM ON)  # or OFF if local-only
+        FetchContent_Populate(krowkee)
+        add_subdirectory(${krowkee_SOURCE_DIR} ${krowkee_BINARY_DIR})
+        message(STATUS "Cloned krowkee dependency " ${krowkee_SOURCE_DIR})
     endif ()
 else ()
-    message(STATUS "Found installed croquis dependency " ${croquis_DIR})
+    message(STATUS "Found installed krowkee dependency " ${krowkee_DIR})
 endif ()
 ```
 
@@ -85,23 +85,23 @@ endif ()
 ## Building
 These instructions assume that you have a relatively modern C++ compiler 
 (C++17 required, only tested using GCC).
-If included, `croquis`'s CMake build makes use of find-else fetch semantics for 
+If included, `krowkee`'s CMake build makes use of find-else-fetch semantics for 
 its `ygm` and `cereal` dependencies.
-`croquis` will try to find local installations of the libraries, and will clone
+`krowkee` will try to find local installations of the libraries, and will clone
 and link the repositories internally if none are found.
 
-One can build a local-only version of `croquis` by passing 
- to `cmake .. -DCROQUIS_USE_YGM=OFF`.
+One can build a local-only version of `krowkee` by passing 
+ to `cmake .. -DKROWKEE_USE_YGM=OFF`.
 
 `spack` is a convenient means to include `cereal` and manage compilers, but 
-is not required to build `croquis`. 
+is not required to build `krowkee`. 
 
 ### Build steps
 Clone the project and make the build directory
 ``` bash
-$ git clone ssh://git@czgitlab.llnl.gov:7999/croquis/croquis.git
-$ mkdir croquis/build
-$ cd croquis/build
+$ git clone ssh://git@czgitlab.llnl.gov:7999/krowkee/krowkee.git
+$ mkdir krowkee/build
+$ cd krowkee/build
 ```
 
 Option 1: use spack
@@ -116,22 +116,22 @@ Option 2: use module
 $ module load gcc/8.3.1  # or desired gcc version
 ```
 
-Build `croquis`.
+Build `krowkee`.
 ``` bash
 $ cmake ..
 $ make
 ```
 
-Alternately, we can build the local-only version of `croquis` which will not
+Alternately, we can build the local-only version of `krowkee` which will not
 use `ygm`, `cereal`, or MPI.
 ``` bash
-$ cmake .. -DCROQUIS_USE_YGM=OFF
+$ cmake .. -DKROWKEE_USE_YGM=OFF
 $ make
 ```
 
 ### Installation
 
-`croquis` build system supports local installation of it and all dependent 
+`krowkee` build system supports local installation of it and all dependent 
 header-only libraries (`ygm` and `cereal`) via `make install`. 
 If operating on a system without write permissions to CMake's default 
 installtion locations, set the `CMAKE_INSTALL PREFIX`:
@@ -148,7 +148,7 @@ to your `CMAKE_PREFIX_PATH` in your `.profile`, `.bashrc`, or equivalent.
 
 ## Testing
 
-It is easy to run all test cases once croquis is built by running
+It is easy to run all test cases once krowkee is built by running
 ``` bash
 make test
 ```
@@ -170,7 +170,7 @@ All tests support an `-h` flag listing options.
 
 # License
 
-`croquis` is distributed under the MIT license.
+`krowkee` is distributed under the MIT license.
 
 All new contributions must be made under the MIT license.
 

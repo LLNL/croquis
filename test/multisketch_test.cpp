@@ -1,16 +1,16 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/sketch/interface.hpp>
-#include <croquis/stream/interface.hpp>
+#include <krowkee/sketch/interface.hpp>
+#include <krowkee/stream/interface.hpp>
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/util/cmap_types.hpp>
-#include <croquis/util/sketch_types.hpp>
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/cmap_types.hpp>
+#include <krowkee/util/sketch_types.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <getopt.h>
 #include <stdio.h>
@@ -18,32 +18,32 @@
 
 #include <cstring>
 
-using sketch_type_t = croquis::util::sketch_type_t;
-using cmap_type_t   = croquis::util::cmap_type_t;
+using sketch_type_t = krowkee::util::sketch_type_t;
+using cmap_type_t   = krowkee::util::cmap_type_t;
 
 using MultiLocalDense32CountSketch =
-    croquis::stream::MultiLocalCountSketch<croquis::sketch::Dense,
+    krowkee::stream::MultiLocalCountSketch<krowkee::sketch::Dense,
                                            std::uint64_t, std::int32_t>;
 
 using MultiLocalMapSparse32CountSketch =
-    croquis::stream::MultiLocalCountSketch<croquis::sketch::MapSparse32,
+    krowkee::stream::MultiLocalCountSketch<krowkee::sketch::MapSparse32,
                                            std::uint64_t, std::int32_t>;
 using MultiLocalMapPromotable32CountSketch =
-    croquis::stream::MultiLocalCountSketch<croquis::sketch::MapPromotable32,
+    krowkee::stream::MultiLocalCountSketch<krowkee::sketch::MapPromotable32,
                                            std::uint64_t, std::int32_t>;
 
 #if __has_include(<boost/container/flat_map.hpp>)
 using MultiLocalFlatMapSparse32CountSketch =
-    croquis::stream::MultiLocalCountSketch<croquis::sketch::FlatMapSparse32,
+    krowkee::stream::MultiLocalCountSketch<krowkee::sketch::FlatMapSparse32,
                                            std::uint64_t, std::int32_t>;
 
 using MultiLocalFlatMapPromotable32CountSketch =
-    croquis::stream::MultiLocalCountSketch<croquis::sketch::FlatMapPromotable32,
+    krowkee::stream::MultiLocalCountSketch<krowkee::sketch::FlatMapPromotable32,
                                            std::uint64_t, std::int32_t>;
 #endif
 
 using MultiLocalDense32FWHT =
-    croquis::stream::MultiLocalFWHT<std::uint64_t, std::int32_t>;
+    krowkee::stream::MultiLocalFWHT<std::uint64_t, std::int32_t>;
 
 /**
  * Struct bundling the experiment parameters.
@@ -60,7 +60,7 @@ struct parameters_t {
 };
 
 /**
- * Verify that croquis::Sketch::Multi correctly handles multiple SketchType
+ * Verify that krowkee::Sketch::Multi correctly handles multiple SketchType
  * objects. Not sure how much more thorough I should be.
  */
 template <typename SketchType, template <typename> class MakePtrFunc>
@@ -236,10 +236,10 @@ void parse_args(int argc, char **argv, parameters_t &params) {
         params.promotion_threshold = std::atoll(optarg);
         break;
       case 't':
-        params.sketch_type = croquis::util::get_sketch_type(optarg);
+        params.sketch_type = krowkee::util::get_sketch_type(optarg);
         break;
       case 'm':
-        params.cmap_type = croquis::util::get_cmap_type(optarg);
+        params.cmap_type = krowkee::util::get_cmap_type(optarg);
         break;
       case 's':
         params.seed = std::atol(optarg);
@@ -332,7 +332,7 @@ void do_all_local_tests(const parameters_t &params) {
 int main(int argc, char **argv) {
   std::uint64_t count(10000);
   std::uint64_t range_size(16);
-  std::uint64_t seed(croquis::hash::default_seed);
+  std::uint64_t seed(krowkee::hash::default_seed);
   std::size_t   compaction_threshold(10);
   std::size_t   promotion_threshold(8);
   sketch_type_t sketch_type(sketch_type_t::cst);

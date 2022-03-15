@@ -1,11 +1,11 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/transform/fwht/utils.hpp>
+#include <krowkee/transform/fwht/utils.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <getopt.h>
 #include <stdio.h>
@@ -56,7 +56,7 @@ struct run_rademacher_test {
     std::vector<int32_t> test_vec(params.numtrials);
     for (int i = 0; i < params.numtrials; i++) {
       std::uint64_t new_seed = params.seed + i;
-      test_vec[i] = croquis::transform::fwht::rademacher_flip<int32_t>(
+      test_vec[i] = krowkee::transform::fwht::rademacher_flip<int32_t>(
           params.val, params.col_index, new_seed);
     }
     int    sum(std::accumulate(test_vec.begin(), test_vec.end(), 0));
@@ -80,7 +80,7 @@ struct run_uniform_sample_test {
     for (int i = 0; i < params.numtrials; i++) {
       std::uint64_t new_seed = params.seed + i;
 
-      test_vec_unif = croquis::transform::fwht::uniform_sample_vec(
+      test_vec_unif = krowkee::transform::fwht::uniform_sample_vec(
           params.num_vertices, params.sketch_size, params.row_index, new_seed);
 
       // std::cout << "\t" << test_vec_unif << std::endl;
@@ -117,7 +117,7 @@ struct count_set_bits_test {
   void operator()(const parameters_t& params) const {
     for (int i(0); i < 500; i++) {
       std::cout << "(" << i << ","
-                << croquis::transform::fwht::count_set_bits(i) << ") ";
+                << krowkee::transform::fwht::count_set_bits(i) << ") ";
     }
     std::cout << std::endl;
   }
@@ -129,7 +129,7 @@ struct get_parity_test {
   void operator()(const parameters_t& params) const {
     bool parity_success(true);
     for (int i(0); i < params.numtrials; ++i) {
-      if (croquis::transform::fwht::get_parity(i) != i % 2) {
+      if (krowkee::transform::fwht::get_parity(i) != i % 2) {
         parity_success = false;
       };
     }
@@ -153,7 +153,7 @@ struct get_hadamard_element_test {
           hadamard_truth[i][j + x]     = hadamard_truth[i][j];
           hadamard_truth[i + x][j + x] = RegType(-1) * hadamard_truth[i][j];
           RegType elem_ij(
-              croquis::transform::fwht::get_hadamard_element<RegType>(i, j));
+              krowkee::transform::fwht::get_hadamard_element<RegType>(i, j));
           hadamard[i + x][j]     = elem_ij;
           hadamard[i][j + x]     = elem_ij;
           hadamard[i + x][j + x] = RegType(-1) * elem_ij;
@@ -178,7 +178,7 @@ struct get_sketch_vector_test {
 
   void operator()(const parameters_t& params) const {
     std::vector<int32_t> test_sketch_vec =
-        croquis::transform::fwht::get_sketch_vector<int32_t>(
+        krowkee::transform::fwht::get_sketch_vector<int32_t>(
             params.val, params.row_index, params.col_index, params.num_vertices,
             params.sketch_size, params.seed);
     {
@@ -207,7 +207,7 @@ struct get_sketch_vector_test {
     }
     {
       std::vector<int32_t> second_sketch_vec =
-          croquis::transform::fwht::get_sketch_vector<int32_t>(
+          krowkee::transform::fwht::get_sketch_vector<int32_t>(
               params.val, params.row_index, params.col_index,
               params.num_vertices, params.sketch_size, params.seed);
       bool agree_success = test_sketch_vec == second_sketch_vec;
@@ -229,13 +229,13 @@ struct orthonormality_test {
     const std::uint64_t row_index_2 = 100;
     const std::uint64_t col_index_2 = row_index_2;
     for (int i = 0; i < max_power; i++) {
-      sum_row += croquis::transform::fwht::get_hadamard_element<std::int32_t>(
+      sum_row += krowkee::transform::fwht::get_hadamard_element<std::int32_t>(
                      row_index, i) *
-                 croquis::transform::fwht::get_hadamard_element<std::int32_t>(
+                 krowkee::transform::fwht::get_hadamard_element<std::int32_t>(
                      row_index_2, i);
-      sum_col += croquis::transform::fwht::get_hadamard_element<std::int32_t>(
+      sum_col += krowkee::transform::fwht::get_hadamard_element<std::int32_t>(
                      i, col_index) *
-                 croquis::transform::fwht::get_hadamard_element<std::int32_t>(
+                 krowkee::transform::fwht::get_hadamard_element<std::int32_t>(
                      i, col_index_2);
     }
     bool row_success = sum_row == 0;

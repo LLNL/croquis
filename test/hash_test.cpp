@@ -1,13 +1,13 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
 #undef NDEBUG
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #if __has_include(<cereal/cereal.hpp>)
 #include <check_archive.hpp>
@@ -20,9 +20,9 @@
 #include <cstring>
 #include <iostream>
 
-typedef croquis::hash::WangHash    wh_t;
-typedef croquis::hash::MulShift    ms_t;
-typedef croquis::hash::MulAddShift mas_t;
+typedef krowkee::hash::WangHash    wh_t;
+typedef krowkee::hash::MulShift    ms_t;
+typedef krowkee::hash::MulAddShift mas_t;
 
 typedef std::chrono::system_clock Clock;
 typedef std::chrono::nanoseconds  ns_t;
@@ -37,7 +37,7 @@ struct parameters_t {
   bool          verbose;
 };
 
-void is_pow2_throw() { croquis::hash::is_pow2(-5); }
+void is_pow2_throw() { krowkee::hash::is_pow2(-5); }
 
 struct pow2_check {
   const char *name() const { return "pow2 check"; }
@@ -45,7 +45,7 @@ struct pow2_check {
   template <typename T>
   void check_ceil2(bool &ceil_log2_success, const T val, const T target,
                    const parameters_t &params) const {
-    int pow(croquis::hash::ceil_log2_64(val));
+    int pow(krowkee::hash::ceil_log2_64(val));
     if (pow != target) {
       ceil_log2_success = false;
     }
@@ -58,7 +58,7 @@ struct pow2_check {
     std::uint64_t one(1);
     bool          pow2_correct_success = true;
     for (std::uint64_t i(0); i < 64; ++i) {
-      if (!croquis::hash::is_pow2(one << i)) {
+      if (!krowkee::hash::is_pow2(one << i)) {
         std::cout << "Incorrectly assigned " << (1 << i)
                   << " as a non-power of 2" << std::endl;
         pow2_correct_success = false;
@@ -69,7 +69,7 @@ struct pow2_check {
     bool                       pow2_incorrect_success = true;
     std::vector<std::uint64_t> nonpows{3, 13, 71978281, 2821, 29028143};
     for (const std::uint64_t nonpow : nonpows) {
-      if (croquis::hash::is_pow2(nonpow)) {
+      if (krowkee::hash::is_pow2(nonpow)) {
         std::cout << "Incorrectly assigned " << nonpow << " as a power of 2"
                   << std::endl;
         pow2_incorrect_success = false;
@@ -111,7 +111,7 @@ struct empirical_histograms {
   void empirical_histogram(const parameters_t params,
                            const double std_dev_range, ARGS &&...args) const {
     std::uint64_t m(
-        std::max(croquis::hash::ceil_pow2_64(params.range), std::uint64_t(2)));
+        std::max(krowkee::hash::ceil_pow2_64(params.range), std::uint64_t(2)));
     std::vector<std::uint64_t> hist(m);
     // HashType hash{m, std::forward<ARGS>(args)...};
     auto     start = Clock::now();
@@ -268,7 +268,7 @@ void parse_args(int argc, char **argv, parameters_t &params) {
 int main(int argc, char **argv) {
   std::uint64_t count(10000);
   std::uint64_t range(16);
-  std::uint64_t seed(croquis::hash::default_seed);
+  std::uint64_t seed(krowkee::hash::default_seed);
   bool          verbose(false);
 
   parameters_t params{count, range, seed, verbose};
