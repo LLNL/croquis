@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -32,7 +32,7 @@
 // Multi Stream Type Presets
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace croquis {
+namespace krowkee {
 namespace stream {
 
 template <template <typename, typename...> class SketchFunc,
@@ -40,25 +40,25 @@ template <template <typename, typename...> class SketchFunc,
           template <typename> class MergeOp, typename KeyType, typename RegType,
           typename... Args>
 using MultiLocal =
-    Multi<CountingSummary, croquis::sketch::Sketch, SketchFunc, ContainerType,
+    Multi<CountingSummary, krowkee::sketch::Sketch, SketchFunc, ContainerType,
           MergeOp, KeyType, RegType, std::shared_ptr, Args...>;
 
 template <template <typename, typename> class ContainerType, typename KeyType,
           typename RegType>
 using MultiLocalCountSketch =
-    MultiLocal<croquis::transform::CountSketchFunctor, ContainerType, std::plus,
-               KeyType, RegType, croquis::hash::MulAddShift>;
+    MultiLocal<krowkee::transform::CountSketchFunctor, ContainerType, std::plus,
+               KeyType, RegType, krowkee::hash::MulAddShift>;
 
 template <typename KeyType, typename RegType>
 using MultiLocalFWHT =
-    MultiLocal<croquis::transform::FWHTFunctor, croquis::sketch::Dense,
+    MultiLocal<krowkee::transform::FWHTFunctor, krowkee::sketch::Dense,
                std::plus, KeyType, RegType>;
 
 }  // namespace stream
-}  // namespace croquis
+}  // namespace krowkee
 
 #if __has_include(<ygm/comm.hpp>)
-// namespace croquis {
+// namespace krowkee {
 // namespace stream {
 
 // // high level map types
@@ -68,7 +68,7 @@ using MultiLocalFWHT =
 //           template <typename> class MergeOp, typename KeyType, typename
 //           RegType, typename... Args>
 // using MultiCommunicable =
-//     Multi<CountingSummary, croquis::sketch::Sketch, SketchFunc,
+//     Multi<CountingSummary, krowkee::sketch::Sketch, SketchFunc,
 //     ContainerType,
 //           MergeOp, KeyType, RegType, ygm::ygm_ptr, Args...>;
 
@@ -76,20 +76,20 @@ using MultiLocalFWHT =
 // KeyType,
 //           typename RegType>
 // using MultiCommunicableCountSketch =
-//     MultiCommunicable<croquis::transform::CountSketchFunctor, ContainerType,
+//     MultiCommunicable<krowkee::transform::CountSketchFunctor, ContainerType,
 //                       std::plus, KeyType, RegType,
-//                       croquis::hash::MulAddShift>;
+//                       krowkee::hash::MulAddShift>;
 
 // template <typename KeyType, typename RegType>
 // using MultiCommunicableFWHT =
-//     MultiCommunicable<croquis::transform::FWHTFunctor,
-//     croquis::sketch::Dense,
+//     MultiCommunicable<krowkee::transform::FWHTFunctor,
+//     krowkee::sketch::Dense,
 //                       std::plus, KeyType, RegType>;
 
 // }  // namespace stream
-// }  // namespace croquis
+// }  // namespace krowkee
 
-namespace croquis {
+namespace krowkee {
 namespace stream {
 
 template <template <typename, typename...> class SketchFunc,
@@ -97,23 +97,23 @@ template <template <typename, typename...> class SketchFunc,
           template <typename> class MergeOp, typename KeyType, typename RegType,
           typename... Args>
 using CountingDistributed =
-    Distributed<CountingSummary, croquis::sketch::Sketch, SketchFunc,
+    Distributed<CountingSummary, krowkee::sketch::Sketch, SketchFunc,
                 ContainerType, MergeOp, KeyType, RegType, Args...>;
 
 template <template <typename, typename> class ContainerType, typename KeyType,
           typename RegType>
 using CountingDistributedCountSketch =
-    CountingDistributed<croquis::transform::CountSketchFunctor, ContainerType,
+    CountingDistributed<krowkee::transform::CountSketchFunctor, ContainerType,
                         std::plus, KeyType, RegType,
-                        croquis::hash::MulAddShift>;
+                        krowkee::hash::MulAddShift>;
 
 template <typename KeyType, typename RegType>
 using CountingDistributedFWHT =
-    CountingDistributed<croquis::transform::FWHTFunctor, croquis::sketch::Dense,
+    CountingDistributed<krowkee::transform::FWHTFunctor, krowkee::sketch::Dense,
                         std::plus, KeyType, RegType>;
 
 }  // namespace stream
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif
 #endif

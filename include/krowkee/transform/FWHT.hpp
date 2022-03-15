@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -13,10 +13,10 @@
 #include <sstream>
 #include <vector>
 
-namespace croquis {
+namespace krowkee {
 namespace transform {
 
-using croquis::stream::Element;
+using krowkee::stream::Element;
 
 /// good reference for operator declarations:
 /// https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading
@@ -48,7 +48,7 @@ class FWHTFunctor {
    */
   template <typename... Args>
   FWHTFunctor<RegType>(const std::uint64_t range_size = 64,
-                       const std::uint64_t seed = croquis::hash::default_seed,
+                       const std::uint64_t seed = krowkee::hash::default_seed,
                        const std::uint64_t domain_size = 1024,
                        const Args &&...args)
       : _range_size(range_size), _seed(seed), _domain_size(domain_size) {}
@@ -75,7 +75,7 @@ class FWHTFunctor {
    *
    * @tparam ContainerType The type of the underlying sketch data structure.
    * @tparam ItemArgs... types of parameters of the stream object to be
-   *     inserted. Will be used to construct an croquis::stream::Element object.
+   *     inserted. Will be used to construct an krowkee::stream::Element object.
    *
    * @param[out] registers the vector of registers.
    * @param[in] x the object to be inserted.
@@ -90,7 +90,7 @@ class FWHTFunctor {
     const std::uint64_t    row_index    = stream_element.identifier;
     const RegType          multiplicity = stream_element.multiplicity;
     std::vector<RegType>   sketch_vec =
-        croquis::transform::fwht::get_sketch_vector(multiplicity, row_index,
+        krowkee::transform::fwht::get_sketch_vector(multiplicity, row_index,
                                                     col_index, _domain_size,
                                                     _range_size, _seed);
 
@@ -136,6 +136,6 @@ std::ostream &operator<<(std::ostream &os, const FWHTFunctor<RegType> &func) {
   return os;
 }
 }  // namespace transform
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

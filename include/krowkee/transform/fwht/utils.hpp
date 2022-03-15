@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -9,7 +9,7 @@
 
 #include <krowkee/transform/fwht/utils_temp.hpp>
 
-namespace croquis {
+namespace krowkee {
 namespace transform {
 namespace fwht {
 
@@ -27,7 +27,7 @@ constexpr RegType rademacher_flip(RegType val, const std::uint64_t col_index,
 std::vector<uint64_t> uniform_sample_vec(
     const std::uint64_t input_size, const std::uint64_t sketch_size,
     const std::uint64_t row_index,
-    const std::uint64_t seed = croquis::hash::default_seed) {
+    const std::uint64_t seed = krowkee::hash::default_seed) {
   // Initialize a default_random_engine with the seed
   const std::uint64_t        new_seed = seed + row_index;
   std::default_random_engine myRandomEngine(new_seed);
@@ -66,7 +66,7 @@ constexpr std::vector<RegType> get_sketch_vector(
     const RegType val, const std::uint64_t row_index,
     const std::uint64_t col_index, const std::uint64_t num_vertices,
     const std::uint64_t sketch_size,
-    const std::uint64_t seed = croquis::hash::default_seed) {
+    const std::uint64_t seed = krowkee::hash::default_seed) {
   const RegType signed_multiplicity = rademacher_flip(val, row_index, seed);
   const std::vector<uint64_t> sample_indices =
       uniform_sample_vec(num_vertices, sketch_size, col_index, seed);
@@ -79,5 +79,5 @@ constexpr std::vector<RegType> get_sketch_vector(
 }
 }  // namespace fwht
 }  // namespace transform
-}  // namespace croquis
+}  // namespace krowkee
 #endif

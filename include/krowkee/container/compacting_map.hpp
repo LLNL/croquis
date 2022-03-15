@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -22,7 +22,7 @@
 #include <sstream>
 #include <vector>
 
-namespace croquis {
+namespace krowkee {
 namespace container {
 
 // template <typename KeyType, typename ValueType>
@@ -206,7 +206,7 @@ class compacting_map {
 
   inline std::string full_name() const {
     std::stringstream ss;
-    ss << name() << " using " << croquis::hash::type_name<map_t>()
+    ss << name() << " using " << krowkee::hash::type_name<map_t>()
        << " with threshold " << _compaction_threshold;
     return ss.str();
   }
@@ -694,6 +694,6 @@ class compacting_map {
 };
 
 }  // namespace container
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

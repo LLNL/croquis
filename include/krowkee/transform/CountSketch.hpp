@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -13,10 +13,10 @@
 #include <sstream>
 #include <vector>
 
-namespace croquis {
+namespace krowkee {
 namespace transform {
 
-using croquis::stream::Element;
+using krowkee::stream::Element;
 
 /// good reference for operator declarations:
 /// https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading
@@ -58,10 +58,10 @@ class CountSketchFunctor {
    */
   template <typename... Args>
   CountSketchFunctor(const std::uint64_t range_size,
-                     const std::uint64_t seed = croquis::hash::default_seed,
+                     const std::uint64_t seed = krowkee::hash::default_seed,
                      const Args &...args)
       : _reg_hf(range_size, seed, args...),
-        _pol_hf(2, croquis::hash::wang64(seed), args...) {}
+        _pol_hf(2, krowkee::hash::wang64(seed), args...) {}
 
   CountSketchFunctor() {}
 
@@ -85,7 +85,7 @@ class CountSketchFunctor {
    *
    * @tparam ContainerType The type of the underlying sketch data structure.
    * @tparam ItemArgs... types of parameters of the stream object to be
-   *     inserted. Will be used to construct a croquis::stream::Element object.
+   *     inserted. Will be used to construct a krowkee::stream::Element object.
    *
    * @param[out] registers the vector of registers.
    * @param[in] x the object to be inserted.
@@ -103,7 +103,7 @@ class CountSketchFunctor {
    *
    * @tparam ContainerType The type of the underlying sketch data structure.
    * @tparam ItemArgs... types of parameters of the stream object to be
-   *     inserted. Will be used to construct an croquis::stream::Element object.
+   *     inserted. Will be used to construct an krowkee::stream::Element object.
    *
    * @param[out] registers the vector of registers.
    * @param[in] x the object to be inserted.
@@ -173,6 +173,6 @@ std::ostream &operator<<(std::ostream                                &os,
   return os;
 }
 }  // namespace transform
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

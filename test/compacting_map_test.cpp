@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -32,12 +32,12 @@
 #include <random>
 #include <vector>
 
-using cmap_type_t = croquis::util::cmap_type_t;
+using cmap_type_t = krowkee::util::cmap_type_t;
 
-typedef croquis::container::compacting_map<int, int> csm_t;
+typedef krowkee::container::compacting_map<int, int> csm_t;
 
 #if __has_include(<boost/container/flat_map.hpp>)
-typedef croquis::container::compacting_map<int, int, boost::container::flat_map>
+typedef krowkee::container::compacting_map<int, int, boost::container::flat_map>
     cbm_t;
 #endif
 
@@ -434,7 +434,7 @@ void parse_args(int argc, char **argv, parameters_t &params) {
         params.count = std::atol(optarg);
         break;
       case 'm':
-        params.cmap_type = croquis::util::get_cmap_type(optarg);
+        params.cmap_type = krowkee::util::get_cmap_type(optarg);
         break;
       case 's':
         params.seed = std::atol(optarg);

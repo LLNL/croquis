@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -15,7 +15,7 @@
 
 #include <memory>
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 enum class promotable_mode_t : std::uint8_t { sparse, dense };
@@ -30,9 +30,9 @@ template <typename RegType, typename MergeOp,
           template <typename, typename> class MapType, typename KeyType>
 class Promotable {
  public:
-  typedef croquis::sketch::Dense<RegType, MergeOp> dense_t;
+  typedef krowkee::sketch::Dense<RegType, MergeOp> dense_t;
   typedef std::unique_ptr<dense_t>                 dense_ptr_t;
-  typedef croquis::sketch::Sparse<RegType, MergeOp, MapType, KeyType> sparse_t;
+  typedef krowkee::sketch::Sparse<RegType, MergeOp, MapType, KeyType> sparse_t;
   typedef typename sparse_t::map_t                                    map_t;
   typedef std::unique_ptr<sparse_t>                      sparse_ptr_t;
   typedef Promotable<RegType, MergeOp, MapType, KeyType> promotable_t;
@@ -168,7 +168,7 @@ class Promotable {
 
   static inline std::string full_name() {
     std::stringstream ss;
-    ss << name() << " using " << croquis::hash::type_name<map_t>();
+    ss << name() << " using " << krowkee::hash::type_name<map_t>();
     return ss.str();
   }
 
@@ -444,6 +444,6 @@ class Promotable {
 };
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

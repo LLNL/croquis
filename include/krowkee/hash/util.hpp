@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -14,7 +14,7 @@
 #include <memory>
 #include <sstream>
 
-namespace croquis {
+namespace krowkee {
 namespace hash {
 
 const std::uint64_t default_seed = 1082087245;
@@ -136,6 +136,6 @@ std::string type_name() {
   return r;
 }
 }  // namespace hash
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

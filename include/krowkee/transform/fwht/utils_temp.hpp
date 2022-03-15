@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -11,7 +11,7 @@
 
 #include <random>
 
-namespace croquis {
+namespace krowkee {
 namespace transform {
 namespace fwht {
 
@@ -19,7 +19,7 @@ struct FWHT_no_hash {
   template <typename RegType>
   constexpr RegType rademacher_flip(
       RegType &vec, const std::uint64_t col_index,
-      const std::uint64_t seed = croquis::hash::default_seed) {
+      const std::uint64_t seed = krowkee::hash::default_seed) {
     const std::uint64_t col_seed = seed + col_index;
     std::srand(col_seed);
     // assign random numbers, same random number used for each row
@@ -33,5 +33,5 @@ struct FWHT_no_hash {
 };
 }  // namespace fwht
 }  // namespace transform
-}  // namespace croquis
+}  // namespace krowkee
 #endif

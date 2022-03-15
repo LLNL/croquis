@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -11,7 +11,7 @@
 #include <map>
 #include <sstream>
 
-namespace croquis {
+namespace krowkee {
 namespace stream {
 
 /**
@@ -98,7 +98,7 @@ class Multi {
    * `id` if one does not already exist.
    *
    * @tparam ItemArgs... types of parameters of the stream object to be
-   *     inserted. Will be used to construct a croquis::stream::Element object.
+   *     inserted. Will be used to construct a krowkee::stream::Element object.
    *
    * @param key the row identifier.
    * @param x the object to be inserted.
@@ -231,6 +231,6 @@ class Multi {
 };
 
 }  // namespace stream
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

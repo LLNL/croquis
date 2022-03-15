@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -10,7 +10,7 @@
 #include <cereal/types/memory.hpp>
 #endif
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 /**
@@ -53,7 +53,7 @@ class Sketch {
   /**
    * copy constructor
    *
-   * @param rhs croquis::sketch::Sketch to be copied.
+   * @param rhs krowkee::sketch::Sketch to be copied.
    */
   Sketch(const sk_t &rhs) : _con(rhs._con), _sf_ptr(rhs._sf_ptr) {}
 
@@ -73,7 +73,7 @@ class Sketch {
   // /**
   //  * move constructor
   //  *
-  //  * @param rhs croquis::sketch::Sketch to be destructively copied.
+  //  * @param rhs krowkee::sketch::Sketch to be destructively copied.
   //  */
   // Sketch(sk_t &&rhs) noexcept : Sketch() { std::swap(*this, rhs); }
 
@@ -99,7 +99,7 @@ class Sketch {
    * Insert item into registers using sketch functor.
    *
    * @tparam ItemArgs... types of parameters of the stream object to be
-   *     inserted. Will be used to construct an croquis::stream::Element object.
+   *     inserted. Will be used to construct an krowkee::stream::Element object.
    *
    * @param x the object to be inserted.
    * @param multiplicity the number of insert repetitions to perform. Can be
@@ -252,6 +252,6 @@ class Sketch {
 };
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

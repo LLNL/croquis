@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -15,7 +15,7 @@
 
 #include <random>
 
-namespace croquis {
+namespace krowkee {
 namespace hash {
 /**
  * Hash functor base class
@@ -305,5 +305,5 @@ std::ostream &operator<<(std::ostream &os, const Base &func) {
   return os;
 }
 }  // namespace hash
-}  // namespace croquis
+}  // namespace krowkee
 #endif

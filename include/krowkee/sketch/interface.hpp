@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -32,7 +32,7 @@
 // Sketch Type Presets
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 template <template <typename, typename...> class SketchFunc,
@@ -43,18 +43,18 @@ using LocalSketch = Sketch<SketchFunc, ContainerType, MergeOp, RegType,
 
 template <template <typename, typename> class ContainerType, typename RegType>
 using LocalCountSketch =
-    LocalSketch<croquis::transform::CountSketchFunctor, ContainerType,
-                std::plus, RegType, croquis::hash::MulAddShift>;
+    LocalSketch<krowkee::transform::CountSketchFunctor, ContainerType,
+                std::plus, RegType, krowkee::hash::MulAddShift>;
 
 template <typename RegType>
-using LocalFWHT = LocalSketch<croquis::transform::FWHTFunctor,
-                              croquis::sketch::Dense, std::plus, RegType>;
+using LocalFWHT = LocalSketch<krowkee::transform::FWHTFunctor,
+                              krowkee::sketch::Dense, std::plus, RegType>;
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 #if __has_include(<ygm/comm.hpp>)
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 template <template <typename, typename...> class SketchFunc,
@@ -65,23 +65,23 @@ using CommunicableSketch =
 
 template <template <typename, typename> class ContainerType, typename RegType>
 using CommunicableCountSketch =
-    CommunicableSketch<croquis::transform::CountSketchFunctor, ContainerType,
-                       std::plus, RegType, croquis::hash::MulAddShift>;
+    CommunicableSketch<krowkee::transform::CountSketchFunctor, ContainerType,
+                       std::plus, RegType, krowkee::hash::MulAddShift>;
 
 template <typename RegType>
 using CommunicableFWHT =
-    CommunicableSketch<croquis::transform::FWHTFunctor, croquis::sketch::Dense,
+    CommunicableSketch<krowkee::transform::FWHTFunctor, krowkee::sketch::Dense,
                        std::plus, RegType>;
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // Sparse Container Presets
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 template <typename RegType, typename MergeOp, typename KeyType>
@@ -100,13 +100,13 @@ using FlatMapSparse32 = FlatMapSparse<RegType, MergeOp, std::uint32_t>;
 #endif
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 ////////////////////////////////////////////////////////////////////////////////
 // Promotable Container Presets
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 template <typename RegType, typename MergeOp, typename KeyType>
@@ -125,6 +125,6 @@ using FlatMapPromotable32 = FlatMapPromotable<RegType, MergeOp, std::uint32_t>;
 #endif
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

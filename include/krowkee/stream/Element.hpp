@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -11,7 +11,7 @@
 #include <vector>
 // // #include <memory>
 
-namespace croquis {
+namespace krowkee {
 namespace stream {
 
 template <typename RegType>
@@ -44,6 +44,6 @@ std::ostream &operator<<(std::ostream &os, const Element<RegType> &item) {
 }
 
 }  // namespace stream
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

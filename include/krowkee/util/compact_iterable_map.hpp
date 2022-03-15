@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -16,7 +16,7 @@
 #include <sstream>
 #include <vector>
 
-namespace croquis {
+namespace krowkee {
 namespace util {
 
 template <typename KeyType, typename ValueType>
@@ -579,6 +579,6 @@ class compact_iterable_map {
 };
 
 }  // namespace util
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

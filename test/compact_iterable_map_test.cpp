@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -18,7 +18,7 @@
 #include <random>
 #include <vector>
 
-typedef croquis::util::compact_iterable_map<int, int> cim_t;
+typedef krowkee::util::compact_iterable_map<int, int> cim_t;
 typedef std::map<int, int>                            map_t;
 typedef std::pair<int, int>                           pair_t;
 

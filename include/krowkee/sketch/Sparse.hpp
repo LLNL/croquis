@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -12,7 +12,7 @@
 #include <sstream>
 #include <vector>
 
-namespace croquis {
+namespace krowkee {
 namespace sketch {
 
 /**
@@ -28,7 +28,7 @@ template <typename RegType, typename MergeOp,
           template <typename, typename> class MapType, typename KeyType>
 class Sparse {
  public:
-  typedef croquis::container::compacting_map<KeyType, RegType, MapType> col_t;
+  typedef krowkee::container::compacting_map<KeyType, RegType, MapType> col_t;
   typedef typename col_t::vec_iter_t                 vec_iter_t;
   typedef typename col_t::vec_citer_t                vec_citer_t;
   typedef typename col_t::pair_t                     pair_t;
@@ -150,7 +150,7 @@ class Sparse {
 
   static inline std::string full_name() {
     std::stringstream ss;
-    ss << name() << " using " << croquis::hash::type_name<map_t>();
+    ss << name() << " using " << krowkee::hash::type_name<map_t>();
     return ss.str();
   }
 
@@ -250,6 +250,6 @@ class Sparse {
 };
 
 }  // namespace sketch
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif

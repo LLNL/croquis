@@ -1,5 +1,5 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
@@ -8,7 +8,7 @@
 
 #include <cstring>
 
-namespace croquis {
+namespace krowkee {
 namespace util {
 enum class cmap_type_t : std::uint8_t { std, boost };
 
@@ -26,6 +26,6 @@ cmap_type_t get_cmap_type(char *arg) {
   }
 }
 }  // namespace util
-}  // namespace croquis
+}  // namespace krowkee
 
 #endif
