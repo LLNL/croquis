@@ -25,7 +25,7 @@ jobs:
         id: cache-boost
         with:
           path: "~/boost_1_77_0"
-          key: libboost1.77-dev
+          key: ${{ runner.os }}-libboost1.77
       - name: Install boost
         env:
           CACHE_HIT: ${{ steps.cache-boost.outputs.cache-hit }}
