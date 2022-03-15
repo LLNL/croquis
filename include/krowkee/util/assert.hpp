@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_UTIL_ASSERT_HPP
-#define _CROQUIS_UTIL_ASSERT_HPP
+#ifndef _KROWKEE_UTIL_ASSERT_HPP
+#define _KROWKEE_UTIL_ASSERT_HPP
 
 #include <cassert>
 #include <iostream>
@@ -20,9 +20,9 @@ void croquis_release_assert_fail(const char *assertion, const char *file,
   throw std::runtime_error(ss.str());
 }
 
-#define CROQUIS_ASSERT_DEBUG(expr) assert(expr)
+#define KROWKEE_ASSERT_DEBUG(expr) assert(expr)
 
-#define CROQUIS_ASSERT_RELEASE(expr) \
+#define KROWKEE_ASSERT_RELEASE(expr) \
   (static_cast<bool>(expr)           \
        ? void(0)                     \
        : croquis_release_assert_fail(#expr, __FILE__, __LINE__, ""))

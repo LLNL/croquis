@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_UTIL_SKETCH_TYPES_HPP
-#define _CROQUIS_UTIL_SKETCH_TYPES_HPP
+#ifndef _KROWKEE_UTIL_SKETCH_TYPES_HPP
+#define _KROWKEE_UTIL_SKETCH_TYPES_HPP
 
 #include <cstring>
 

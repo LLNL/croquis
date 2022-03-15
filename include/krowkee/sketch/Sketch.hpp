@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_SKETCH_SKETCH_HPP
-#define _CROQUIS_SKETCH_SKETCH_HPP
+#ifndef _KROWKEE_SKETCH_SKETCH_HPP
+#define _KROWKEE_SKETCH_SKETCH_HPP
 
 #if __has_include(<cereal/types/memory.hpp>)
 #include <cereal/types/memory.hpp>

@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_SKETCH_DENSE_HPP
-#define _CROQUIS_SKETCH_DENSE_HPP
+#ifndef _KROWKEE_SKETCH_DENSE_HPP
+#define _KROWKEE_SKETCH_DENSE_HPP
 
 #if __has_include(<cereal/types/vector.hpp>)
 #include <cereal/types/vector.hpp>

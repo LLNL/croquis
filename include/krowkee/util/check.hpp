@@ -3,15 +3,15 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_UTIL_CHECK_HPP
-#define _CROQUIS_UTIL_CHECK_HPP
+#ifndef _KROWKEE_UTIL_CHECK_HPP
+#define _KROWKEE_UTIL_CHECK_HPP
 
 #include <krowkee/util/assert.hpp>
 
 inline void CHECK_CONDITION(const bool success, const std::string &msg) {
   std::cout << ((success == true) ? "passed" : "failed") << " " << msg
             << " test" << std::endl;
-  CROQUIS_ASSERT_RELEASE(success);
+  KROWKEE_ASSERT_RELEASE(success);
 }
 
 template <typename ExceptType, typename FuncType, typename... Args>
@@ -32,7 +32,7 @@ inline void CHECK_THROWS(const FuncType &func, const std::string &msg,
     std::cout << "failed to catch expected " << msg << " exception"
               << std::endl;
   }
-  CROQUIS_ASSERT_RELEASE(caught);
+  KROWKEE_ASSERT_RELEASE(caught);
 }
 
 template <typename ExceptType, typename FuncType, typename... Args>
@@ -43,7 +43,7 @@ inline void CHECK_DOES_NOT_THROW(const FuncType &func, const std::string &msg,
   } catch (ExceptType &e) {
     std::cout << msg << " incorrectly threw exception \"" << e.what() << "\""
               << std::endl;
-    CROQUIS_ASSERT_RELEASE(false);
+    KROWKEE_ASSERT_RELEASE(false);
   }
 }
 

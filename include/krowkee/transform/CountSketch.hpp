@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_TRANSFORM_COUNTSKETCH_HPP
-#define _CROQUIS_TRANSFORM_COUNTSKETCH_HPP
+#ifndef _KROWKEE_TRANSFORM_COUNTSKETCH_HPP
+#define _KROWKEE_TRANSFORM_COUNTSKETCH_HPP
 
 #include <krowkee/stream/Element.hpp>
 

@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_STREAM_ELEMENT_HPP
-#define _CROQUIS_STREAM_ELEMENT_HPP
+#ifndef _KROWKEE_STREAM_ELEMENT_HPP
+#define _KROWKEE_STREAM_ELEMENT_HPP
 
 #include <algorithm>
 #include <sstream>

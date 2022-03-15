@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_HASH_HPP_
-#define _CROQUIS_HASH_HPP_
+#ifndef _KROWKEE_HASH_HPP_
+#define _KROWKEE_HASH_HPP_
 
 #include <krowkee/hash/util.hpp>
 // #include "xxhash.h"

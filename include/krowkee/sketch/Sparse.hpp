@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_SKETCH_SPARSE_HPP
-#define _CROQUIS_SKETCH_SPARSE_HPP
+#ifndef _KROWKEE_SKETCH_SPARSE_HPP
+#define _KROWKEE_SKETCH_SPARSE_HPP
 
 #include <krowkee/container/compacting_map.hpp>
 

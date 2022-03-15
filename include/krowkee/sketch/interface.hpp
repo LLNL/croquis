@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_SKETCH_INTERFACE_HPP
-#define _CROQUIS_SKETCH_INTERFACE_HPP
+#ifndef _KROWKEE_SKETCH_INTERFACE_HPP
+#define _KROWKEE_SKETCH_INTERFACE_HPP
 
 #include <krowkee/hash/hash.hpp>
 

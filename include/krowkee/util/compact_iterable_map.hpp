@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_UTIL_COMPACT_ITERABLE_MAP_HPP
-#define _CROQUIS_UTIL_COMPACT_ITERABLE_MAP_HPP
+#ifndef _KROWKEE_UTIL_COMPACT_ITERABLE_MAP_HPP
+#define _KROWKEE_UTIL_COMPACT_ITERABLE_MAP_HPP
 
 #include <algorithm>
 #include <bitset>

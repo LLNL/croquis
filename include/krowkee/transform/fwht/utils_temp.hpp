@@ -4,8 +4,8 @@
 // SPDX-License-Identifier: MIT
 
 // write all need helper functions
-#ifndef _CROQUIS_TRANSFORM_FWHT_UTILS_TEMP_HPP
-#define _CROQUIS_TRANSFORM_FWHT_UTILS_TEMP_HPP
+#ifndef _KROWKEE_TRANSFORM_FWHT_UTILS_TEMP_HPP
+#define _KROWKEE_TRANSFORM_FWHT_UTILS_TEMP_HPP
 
 #include <krowkee/hash/util.hpp>
 

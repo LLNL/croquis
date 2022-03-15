@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_UTIL_MPITESTS_HPP
-#define _CROQUIS_UTIL_MPITESTS_HPP
+#ifndef _KROWKEE_UTIL_MPITESTS_HPP
+#define _KROWKEE_UTIL_MPITESTS_HPP
 
 #include <krowkee/util/ygm_tests.hpp>
 

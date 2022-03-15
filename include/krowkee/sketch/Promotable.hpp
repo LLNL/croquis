@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_SKETCH_PROMOTABLE_HPP
-#define _CROQUIS_SKETCH_PROMOTABLE_HPP
+#ifndef _KROWKEE_SKETCH_PROMOTABLE_HPP
+#define _KROWKEE_SKETCH_PROMOTABLE_HPP
 
 #include <krowkee/sketch/Dense.hpp>
 #include <krowkee/sketch/Sparse.hpp>

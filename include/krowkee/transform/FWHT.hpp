@@ -3,8 +3,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#ifndef _CROQUIS_TRANSFORM_FWHT_HPP
-#define _CROQUIS_TRANSFORM_FWHT_HPP
+#ifndef _KROWKEE_TRANSFORM_FWHT_HPP
+#define _KROWKEE_TRANSFORM_FWHT_HPP
 
 #include <krowkee/transform/fwht/utils.hpp>
 
