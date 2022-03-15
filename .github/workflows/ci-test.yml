@@ -45,8 +45,8 @@ jobs:
           g++-${{ matrix.gcc-version }} --version
           mkdir build
           cd build
-          cmake ../ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE-CXX_COMPILER=g++-${{ matrix.gcc-version }} -DBOOST_ROOT=~/boost_1_77_0
-          make
+          cmake ../ -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_CXX_COMPILER=g++-${{ matrix.gcc-version }} -DBOOST_ROOT=~/boost_1_77_0
+          make -j
       - name: Make test (mpich)
         run: |
           echo Run 'make test' with mpich, gcc-${{ matrix.gcc-version }}
