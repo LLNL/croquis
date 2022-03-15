@@ -3,9 +3,9 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/sketch/interface.hpp>
+#include <krowkee/sketch/interface.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 using Dense32CountSketch =
     croquis::sketch::LocalCountSketch<croquis::sketch::Dense, std::int32_t>;

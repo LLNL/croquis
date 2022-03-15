@@ -6,9 +6,9 @@
 #ifndef _CROQUIS_TRANSFORM_FWHT_HPP
 #define _CROQUIS_TRANSFORM_FWHT_HPP
 
-#include <croquis/transform/fwht/utils.hpp>
+#include <krowkee/transform/fwht/utils.hpp>
 
-#include <croquis/stream/Element.hpp>
+#include <krowkee/stream/Element.hpp>
 
 #include <sstream>
 #include <vector>

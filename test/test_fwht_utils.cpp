@@ -3,9 +3,9 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/transform/fwht/utils.hpp>
+#include <krowkee/transform/fwht/utils.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <getopt.h>
 #include <stdio.h>

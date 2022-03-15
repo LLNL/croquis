@@ -6,9 +6,9 @@
 #ifndef _CROQUIS_TRANSFORM_COUNTSKETCH_HPP
 #define _CROQUIS_TRANSFORM_COUNTSKETCH_HPP
 
-#include <croquis/stream/Element.hpp>
+#include <krowkee/stream/Element.hpp>
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
 #include <sstream>
 #include <vector>

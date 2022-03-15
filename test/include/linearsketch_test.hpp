@@ -3,9 +3,9 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/util/sketch_types.hpp>
+#include <krowkee/util/sketch_types.hpp>
 
-#include <croquis/util/cmap_types.hpp>
+#include <krowkee/util/cmap_types.hpp>
 
 #include <getopt.h>
 #include <stdio.h>

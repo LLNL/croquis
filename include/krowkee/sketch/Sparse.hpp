@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_SKETCH_SPARSE_HPP
 #define _CROQUIS_SKETCH_SPARSE_HPP
 
-#include <croquis/container/compacting_map.hpp>
+#include <krowkee/container/compacting_map.hpp>
 
 #include <algorithm>
 #include <sstream>

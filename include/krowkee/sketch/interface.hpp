@@ -6,16 +6,16 @@
 #ifndef _CROQUIS_SKETCH_INTERFACE_HPP
 #define _CROQUIS_SKETCH_INTERFACE_HPP
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/transform/CountSketch.hpp>
-#include <croquis/transform/FWHT.hpp>
+#include <krowkee/transform/CountSketch.hpp>
+#include <krowkee/transform/FWHT.hpp>
 
-#include <croquis/sketch/Dense.hpp>
-#include <croquis/sketch/Promotable.hpp>
-#include <croquis/sketch/Sparse.hpp>
+#include <krowkee/sketch/Dense.hpp>
+#include <krowkee/sketch/Promotable.hpp>
+#include <krowkee/sketch/Sparse.hpp>
 
-#include <croquis/sketch/Sketch.hpp>
+#include <krowkee/sketch/Sketch.hpp>
 
 #if __has_include(<ygm/comm.hpp>)
 #include <ygm/detail/ygm_ptr.hpp>

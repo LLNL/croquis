@@ -5,9 +5,9 @@
 
 #undef NDEBUG
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #if __has_include(<cereal/cereal.hpp>)
 #include <check_archive.hpp>

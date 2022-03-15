@@ -3,11 +3,11 @@
 #
 # This function adds a Sequential test
 #
-function (add_seq_croquis_test test_name)
+function (add_seq_krowkee_test test_name)
     set(test_source "${test_name}.cpp")
     set(test_exe "SEQ_${test_name}")
     add_executable(${test_exe} ${test_source})
-    target_link_libraries(${test_exe} PRIVATE croquis)
+    target_link_libraries(${test_exe} PRIVATE krowkee)
     target_include_directories(
         ${test_exe}
         PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -16,26 +16,26 @@ function (add_seq_croquis_test test_name)
     add_test(${test_exe} "${CMAKE_CURRENT_BINARY_DIR}/${test_exe}")
 endfunction ()
 
-add_seq_croquis_test(hash_test)
-add_seq_croquis_test(test_fwht_utils)
-add_seq_croquis_test(compacting_map_test)
-add_seq_croquis_test(local_linearsketch_test)
-add_seq_croquis_test(multisketch_test)
+add_seq_krowkee_test(hash_test)
+add_seq_krowkee_test(test_fwht_utils)
+add_seq_krowkee_test(compacting_map_test)
+add_seq_krowkee_test(local_linearsketch_test)
+add_seq_krowkee_test(multisketch_test)
 
-if (CROQUIS_USE_YGM)
+if (krowkee_USE_YGM)
 
-    add_seq_croquis_test(communicable_linearsketch_test)
+    add_seq_krowkee_test(communicable_linearsketch_test)
 
     find_package(MPI REQUIRED)
 
     #
     # This function adds an MPI test
     #
-    function (add_mpi_croquis_test test_name)
+    function (add_mpi_krowkee_test test_name)
         set(test_source "${test_name}.cpp")
         set(test_exe "MPI_${test_name}")
         add_executable(${test_exe} ${test_source})
-        target_link_libraries(${test_exe} PRIVATE croquis)
+        target_link_libraries(${test_exe} PRIVATE krowkee)
         target_include_directories(
             ${test_exe}
             PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -53,5 +53,5 @@ if (CROQUIS_USE_YGM)
         endif ()
     endfunction ()
 
-    add_mpi_croquis_test(distributed_test)
+    add_mpi_krowkee_test(distributed_test)
 endif ()

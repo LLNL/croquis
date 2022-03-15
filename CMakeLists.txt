@@ -1,21 +1,21 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(
-    croquis
+    krowkee
     VERSION 0.1
     DESCRIPTION "HPC multi-stream sketching library"
     LANGUAGES CXX
 )
 
 if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-    set(CROQUIS_MAIN_PROJECT ON)
+    set(KROWKEE_MAIN_PROJECT ON)
 endif ()
 
 # Controls whether to set up install boilerplate for project and depencencies.
 # Expects CMAKE_INSTALL_PREFIX to be set to a suitable directory.
-option(CROQUIS_INSTALL "Generate the install target" ${CROQUIS_MAIN_PROJECT})
+option(KROWKEE_INSTALL "Generate the install target" ${KROWKEE_MAIN_PROJECT})
 
-if (CROQUIS_MAIN_PROJECT)
+if (KROWKEE_MAIN_PROJECT)
 
     # Let's nicely support folders in IDEs
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -47,11 +47,11 @@ endif ()
 # Prepare to invoke FetchContent
 include(FetchContent)
 
-option(CROQUIS_USE_BOOST "Compile using boost::container::flat_map" ON)
-set(croquis_boost_VERSION 1.48)
-if (CROQUIS_USE_BOOST)
+option(KROWKEE_USE_BOOST "Compile using boost::container::flat_map" ON)
+set(krowkee_boost_VERSION 1.48)
+if (KROWKEE_USE_BOOST)
     # find_package(Boost 1.75 COMPONENTS container)
-    find_package(Boost ${croquis_boost_VERSION} QUIET)
+    find_package(Boost ${krowkee_boost_VERSION} QUIET)
     if (Boost_FOUND)
         message(STATUS ${PROJECT_NAME} " found boost include dirs: "
                        ${Boost_INCLUDE_DIRS}
@@ -63,13 +63,13 @@ else ()
     message(STATUS ${PROJECT_NAME} " building without boost")
 endif ()
 
-option(CROQUIS_USE_YGM "Compile using YGM distributed memory features" ON)
-if (CROQUIS_USE_YGM)
+option(KROWKEE_USE_YGM "Compile using YGM distributed memory features" ON)
+if (KROWKEE_USE_YGM)
     # Load cereal
-    set(CROQUIS_CEREAL_VERSION 1.3.0)
+    set(KROWKEE_CEREAL_VERSION 1.3.0)
     # Will do something like this upon new release and fix to spack
-    # distribution. find_package(cereal ${CROQUIS_CEREAL_VERSION} CONFIG QUIET)
-    set(CROQUIS_CEREAL_TARGET "cereal::cereal")
+    # distribution. find_package(cereal ${KROWKEE_CEREAL_VERSION} CONFIG QUIET)
+    set(KROWKEE_CEREAL_TARGET "cereal::cereal")
     find_package(cereal CONFIG QUIET)
     if (NOT cereal_FOUND)
         # Currently cereal version 1.3.0 has an outdated CMakeLists.txt, so we
@@ -89,7 +89,7 @@ if (CROQUIS_USE_YGM)
             # Do not compile any cereal tests
             set(JUST_INSTALL_CEREAL ON)
             # Install cereal at ${CMAKE_INSTALL_PREFIX}
-            set(CEREAL_INSTALL ${CROQUIS_INSTALL})
+            set(CEREAL_INSTALL ${KROWKEE_INSTALL})
             # Populate cereal
             FetchContent_Populate(cereal)
             # Include cereal root cmake boilerplate
@@ -108,20 +108,20 @@ if (CROQUIS_USE_YGM)
                        ${cereal_DIR}
         )
         if (${cereal_DIR} MATCHES ".*spack.*")
-            set(CROQUIS_CEREAL_TARGET "cereal")
+            set(KROWKEE_CEREAL_TARGET "cereal")
         else ()
             # target should still be cereal::cereal
         endif ()
     endif ()
 
     # Load YGM
-    set(CROQUIS_YGM_VERSION 0.4)
-    find_package(ygm ${CROQUIS_YGM_VERSION} CONFIG QUIET)
+    set(KROWKEE_YGM_VERSION 0.4)
+    find_package(ygm ${KROWKEE_YGM_VERSION} CONFIG QUIET)
     if (NOT ygm_FOUND)
         FetchContent_Declare(
             ygm
             GIT_REPOSITORY https://github.com/LLNL/ygm
-            GIT_TAG v${CROQUIS_YGM_VERSION}
+            GIT_TAG v${KROWKEE_YGM_VERSION}
         )
         FetchContent_GetProperties(ygm)
         if (ygm_POPULATED)
@@ -133,7 +133,7 @@ if (CROQUIS_USE_YGM)
             # Do not compile any ygm tests
             set(JUST_INSTALL_YGM ON)
             # Install ygm at ${CMAKE_INSTALL_PREFIX}
-            set(YGM_INSTALL ${CROQUIS_INSTALL})
+            set(YGM_INSTALL ${KROWKEE_INSTALL})
             # Populate ygm
             FetchContent_Populate(ygm)
             # Include ygm cmake boilerplate
@@ -149,28 +149,28 @@ else ()
     message(STATUS ${PROJECT_NAME} " building without ygm")
 endif ()
 
-add_library(croquis INTERFACE)
-add_library(croquis::croquis ALIAS croquis)
+add_library(krowkee INTERFACE)
+add_library(krowkee::krowkee ALIAS krowkee)
 target_include_directories(
-    croquis INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    krowkee INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
                       $<INSTALL_INTERFACE:include>
 )
-target_compile_features(croquis INTERFACE cxx_std_17)
-target_link_libraries(croquis INTERFACE ${CROQUIS_CEREAL_TARGET} ygm::ygm)
+target_compile_features(krowkee INTERFACE cxx_std_17)
+target_link_libraries(krowkee INTERFACE ${KROWKEE_CEREAL_TARGET} ygm::ygm)
 if (Boost_FOUND)
-    target_include_directories(croquis INTERFACE ${Boost_INCLUDE_DIRS})
+    target_include_directories(krowkee INTERFACE ${Boost_INCLUDE_DIRS})
 endif ()
 
 option(TEST_WITH_SLURM "Run tests with Slurm" OFF)
 
-if (CROQUIS_INSTALL)
+if (KROWKEE_INSTALL)
     include(GNUInstallDirs)
     include(CMakePackageConfigHelpers)
 
-    set(CROQUIS_EXPORT_TARGETS croquis)
+    set(KROWKEE_EXPORT_TARGETS krowkee)
 
     install(
-        TARGETS ${CROQUIS_EXPORT_TARGETS}
+        TARGETS ${KROWKEE_EXPORT_TARGETS}
         EXPORT ${PROJECT_NAME}Targets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -184,7 +184,7 @@ if (CROQUIS_INSTALL)
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake
     )
 
-    install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/croquis
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/krowkee
             DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
@@ -209,11 +209,11 @@ if (CROQUIS_INSTALL)
 
 endif ()
 
-option(JUST_INSTALL_CROQUIS "Skip executable compilation" OFF)
-if (JUST_INSTALL_CROQUIS)
+option(JUST_INSTALL_KROWKEE "Skip executable compilation" OFF)
+if (JUST_INSTALL_KROWKEE)
     return()
 endif ()
 
-if (CROQUIS_MAIN_PROJECT)
+if (KROWKEE_MAIN_PROJECT)
     add_subdirectory(test)
 endif ()

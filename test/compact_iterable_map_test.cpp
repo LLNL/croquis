@@ -3,11 +3,11 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/util/compact_iterable_map.hpp>
+#include <krowkee/util/compact_iterable_map.hpp>
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <algorithm>
 #include <chrono>

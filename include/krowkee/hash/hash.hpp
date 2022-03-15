@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_HASH_HPP_
 #define _CROQUIS_HASH_HPP_
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 // #include "xxhash.h"
 
 #if __has_include(<cereal/types/base_class.hpp>)

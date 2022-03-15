@@ -7,7 +7,7 @@
 #ifndef _CROQUIS_TRANSFORM_FWHT_UTILS_TEMP_HPP
 #define _CROQUIS_TRANSFORM_FWHT_UTILS_TEMP_HPP
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
 #include <random>
 

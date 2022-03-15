@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_STREAM_SUMMARY_HPP
 #define _CROQUIS_STREAM_SUMMARY_HPP
 
-#include <croquis/stream/Element.hpp>
+#include <krowkee/stream/Element.hpp>
 
 namespace croquis {
 namespace stream {

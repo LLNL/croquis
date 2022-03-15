@@ -7,7 +7,7 @@
 #ifndef _CROQUIS_TRANSFORM_FWHT_UTILS_HPP
 #define _CROQUIS_TRANSFORM_FWHT_UTILS_HPP
 
-#include <croquis/transform/fwht/utils_temp.hpp>
+#include <krowkee/transform/fwht/utils_temp.hpp>
 
 namespace croquis {
 namespace transform {

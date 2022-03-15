@@ -3,14 +3,14 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/sketch/interface.hpp>
-#include <croquis/stream/interface.hpp>
+#include <krowkee/sketch/interface.hpp>
+#include <krowkee/stream/interface.hpp>
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/util/cmap_types.hpp>
-#include <croquis/util/sketch_types.hpp>
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/cmap_types.hpp>
+#include <krowkee/util/sketch_types.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <getopt.h>
 #include <stdio.h>

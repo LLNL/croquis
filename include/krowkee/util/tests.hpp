@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_UTIL_TESTS_HPP
 #define _CROQUIS_UTIL_TESTS_HPP
 
-#include <croquis/util/check.hpp>
+#include <krowkee/util/check.hpp>
 
 #include <algorithm>
 #include <chrono>

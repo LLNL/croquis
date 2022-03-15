@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_STREAM_MULTI_HPP
 #define _CROQUIS_STREAM_MULTI_HPP
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
 #include <map>
 #include <sstream>

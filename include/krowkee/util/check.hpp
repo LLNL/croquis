@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_UTIL_CHECK_HPP
 #define _CROQUIS_UTIL_CHECK_HPP
 
-#include <croquis/util/assert.hpp>
+#include <krowkee/util/assert.hpp>
 
 inline void CHECK_CONDITION(const bool success, const std::string &msg) {
   std::cout << ((success == true) ? "passed" : "failed") << " " << msg

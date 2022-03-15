@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_UTIL_YGM_TESTS_HPP
 #define _CROQUIS_UTIL_YGM_TESTS_HPP
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <ygm/detail/ygm_ptr.hpp>
 

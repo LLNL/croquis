@@ -6,8 +6,8 @@
 #ifndef _CROQUIS_SKETCH_PROMOTABLE_HPP
 #define _CROQUIS_SKETCH_PROMOTABLE_HPP
 
-#include <croquis/sketch/Dense.hpp>
-#include <croquis/sketch/Sparse.hpp>
+#include <krowkee/sketch/Dense.hpp>
+#include <krowkee/sketch/Sparse.hpp>
 
 #if __has_include(<cereal/types/memory.hpp>)
 #include <cereal/types/memory.hpp>

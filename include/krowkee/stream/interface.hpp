@@ -6,22 +6,22 @@
 #ifndef _CROQUIS_STREAM_INTERFACE_HPP
 #define _CROQUIS_STREAM_INTERFACE_HPP
 
-#include <croquis/hash/hash.hpp>
+#include <krowkee/hash/hash.hpp>
 
-#include <croquis/transform/CountSketch.hpp>
-#include <croquis/transform/FWHT.hpp>
+#include <krowkee/transform/CountSketch.hpp>
+#include <krowkee/transform/FWHT.hpp>
 
-#include <croquis/sketch/Dense.hpp>
-#include <croquis/sketch/Promotable.hpp>
-#include <croquis/sketch/Sparse.hpp>
+#include <krowkee/sketch/Dense.hpp>
+#include <krowkee/sketch/Promotable.hpp>
+#include <krowkee/sketch/Sparse.hpp>
 
-#include <croquis/sketch/Sketch.hpp>
+#include <krowkee/sketch/Sketch.hpp>
 
-#include <croquis/stream/Multi.hpp>
-#include <croquis/stream/Summary.hpp>
+#include <krowkee/stream/Multi.hpp>
+#include <krowkee/stream/Summary.hpp>
 
 #if __has_include(<ygm/comm.hpp>)
-#include <croquis/stream/Distributed.hpp>
+#include <krowkee/stream/Distributed.hpp>
 // #include <ygm/detail/ygm_ptr.hpp>
 #endif
 

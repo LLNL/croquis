@@ -6,7 +6,7 @@
 #ifndef _CROQUIS_CONTAINER_COMPACTING_MAP_HPP
 #define _CROQUIS_CONTAINER_COMPACTING_MAP_HPP
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
 #if __has_include(<cereal/types/map.hpp>)
 #include <cereal/types/map.hpp>

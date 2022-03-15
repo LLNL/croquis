@@ -3,12 +3,12 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/container/compacting_map.hpp>
+#include <krowkee/container/compacting_map.hpp>
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
-#include <croquis/util/cmap_types.hpp>
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/cmap_types.hpp>
+#include <krowkee/util/tests.hpp>
 
 #if __has_include(<boost/container/flat_map.hpp>)
 #include <boost/container/flat_map.hpp>

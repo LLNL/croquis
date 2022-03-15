@@ -3,9 +3,9 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/sketch/interface.hpp>
+#include <krowkee/sketch/interface.hpp>
 
-#include <croquis/util/ygm_tests.hpp>
+#include <krowkee/util/ygm_tests.hpp>
 
 using Dense32CountSketch =
     croquis::sketch::CommunicableCountSketch<croquis::sketch::Dense,
