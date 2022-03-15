@@ -1,11 +1,11 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/util/sketch_types.hpp>
+#include <krowkee/util/sketch_types.hpp>
 
-#include <croquis/util/cmap_types.hpp>
+#include <krowkee/util/cmap_types.hpp>
 
 #include <getopt.h>
 #include <stdio.h>
@@ -15,8 +15,8 @@
 #include <cstring>
 #include <iostream>
 
-using sketch_type_t = croquis::util::sketch_type_t;
-using cmap_type_t   = croquis::util::cmap_type_t;
+using sketch_type_t = krowkee::util::sketch_type_t;
+using cmap_type_t   = krowkee::util::cmap_type_t;
 
 /**
  * Struct bundling the experiment parameters.
@@ -114,9 +114,9 @@ struct init_check {
  *     we are getting approximately correct shape preservation in embedded
  *     space.
  *
- * @note[BWP] `croquis::CountSketchFunctor` templated with `croquis::WangHash`
+ * @note[BWP] `krowkee::CountSketchFunctor` templated with `krowkee::WangHash`
  *     produces weird and bad results here. We are unlikely to ever use
- *     `croquis::WangHash`, but it might be worth figuring out what is wrong.
+ *     `krowkee::WangHash`, but it might be worth figuring out what is wrong.
  *     It probably has something to do with the polarity hash, as it looks like
  *     the entries to the first 1/2 of registers are all -1, while the entries
  *     to the second 1/2 of registers are all +1.
@@ -512,10 +512,10 @@ void parse_args(int argc, char **argv, parameters_t &params) {
         params.promotion_threshold = std::atoll(optarg);
         break;
       case 't':
-        params.sketch_type = croquis::util::get_sketch_type(optarg);
+        params.sketch_type = krowkee::util::get_sketch_type(optarg);
         break;
       case 'm':
-        params.cmap_type = croquis::util::get_cmap_type(optarg);
+        params.cmap_type = krowkee::util::get_cmap_type(optarg);
         break;
       case 's':
         params.seed = std::atol(optarg);
@@ -580,7 +580,7 @@ void do_all_tests(const parameters_t &params) {
 int do_main(int argc, char **argv) {
   uint64_t      count(10000);
   std::uint64_t range_size(16);
-  std::uint64_t seed(croquis::hash::default_seed);
+  std::uint64_t seed(krowkee::hash::default_seed);
   std::size_t   compaction_threshold(10);
   std::size_t   promotion_threshold(8);
   sketch_type_t sketch_type(sketch_type_t::cst);

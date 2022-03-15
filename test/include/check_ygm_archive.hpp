@@ -1,9 +1,9 @@
 // Copyright 2021-2022 Lawrence Livermore National Security, LLC and other
-// croquis Project Developers. See the top-level COPYRIGHT file for details.
+// krowkee Project Developers. See the top-level COPYRIGHT file for details.
 //
 // SPDX-License-Identifier: MIT
 
-#include <croquis/util/check.hpp>
+#include <krowkee/util/check.hpp>
 
 #include <ygm/detail/ygm_cereal_archive.hpp>
 

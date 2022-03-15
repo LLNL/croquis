@@ -3,11 +3,11 @@
 //
 // SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-#include <croquis/util/compact_iterable_map.hpp>
+#include <krowkee/util/compact_iterable_map.hpp>
 
-#include <croquis/hash/util.hpp>
+#include <krowkee/hash/util.hpp>
 
-#include <croquis/util/tests.hpp>
+#include <krowkee/util/tests.hpp>
 
 #include <boost/container/flat_map.hpp>
 
@@ -20,7 +20,7 @@
 #include <random>
 #include <vector>
 
-typedef croquis::util::compact_iterable_map<int, int> cim_t;
+typedef krowkee::util::compact_iterable_map<int, int> cim_t;
 typedef std::map<int, int> map_t;
 typedef boost::container::flat_map<int, int> bm_t;
 typedef std::pair<int, int> pair_t;
