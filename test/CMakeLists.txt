@@ -22,7 +22,7 @@ add_seq_krowkee_test(compacting_map_test)
 add_seq_krowkee_test(local_linearsketch_test)
 add_seq_krowkee_test(multisketch_test)
 
-if (krowkee_USE_YGM)
+if (KROWKEE_USE_YGM)
 
     add_seq_krowkee_test(communicable_linearsketch_test)
 
